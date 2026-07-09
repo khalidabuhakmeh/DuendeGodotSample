@@ -1,7 +1,7 @@
 using System.Net;
 using Godot;
 using GodotGame.Services;
-using IdentityModel;
+using Duende.IdentityModel;
 
 namespace GodotGame;
 

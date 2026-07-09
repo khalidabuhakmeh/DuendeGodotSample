@@ -1,8 +1,8 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
-using IdentityModel;
-using IdentityModel.Client;
+using Duende.IdentityModel;
+using Duende.IdentityModel.Client;
 
 namespace GodotGame.Services;
 
@@ -80,7 +80,10 @@ public static class OAuthService
     {
         var verifier = CryptoRandom.CreateUniqueId(32);
         var challengeBytes = SHA256.HashData(Encoding.ASCII.GetBytes(verifier));
-        var challenge = Base64Url.Encode(challengeBytes);
+        var challenge = Convert.ToBase64String(challengeBytes)
+            .Replace('+', '-')
+            .Replace('/', '_')
+            .TrimEnd('=');
         return (verifier, challenge);
     }
 
